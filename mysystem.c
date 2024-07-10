@@ -14,9 +14,9 @@ int mysystem(char *command) {
   int status=0;
   pid_t pid;
   if(command == NULL) {
-    exit(1);
+    return 1;
   } else if((pid=fork())<0) {
-    exit(-1);
+    return -1;
   }
   if(pid != 0) {
     
@@ -28,7 +28,6 @@ int mysystem(char *command) {
     exit(127);
   }
 
-  //return 0;
   return status;
 }
 
@@ -71,14 +70,15 @@ total 624
 -rw-r--r--@ 1 ichikoharario  staff      20  7  4 10:11 x.txt
 retval = 00000000
 
-　〜コマンドが存在しない場合〜
-ichikoharario@ichikohararionoMacBook-Air kadai10-i21itikohara % ./mysysmain aaa 
+　〜コマンドがエラーになる場合〜
+ichikoharario@ichikohrionoAir kadai10-i21itikohara % ./mysysmain "rename a b"
 mysystem:
-sh: aaa: command not found
+sh: rename: command not found
 retval = 00007f00
 system:
-sh: aaa: command not found
+sh: rename: command not found
 retval = 00007f00
+返り値127が16進数に変換されて7fと表示される。
 
 　〜コマンドを入力しない場合〜
 ichikoharario@ichikohararionoMacBook-Air kadai10-i21itikohara % ./mysysmain    
